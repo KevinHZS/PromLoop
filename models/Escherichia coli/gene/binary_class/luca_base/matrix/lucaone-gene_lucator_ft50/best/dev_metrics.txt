@@ -1,0 +1,16 @@
+***** Dev results checkpoint-1911 *****
+Test average loss = 0.470093
+Test total loss = 9.871945
+acc = 0.81194
+avg_loss = 0.470093
+confusion_matrix = {'tn': 148, 'fp': 17, 'fn': 46, 'tp': 124}
+f1 = 0.797428
+mcc = 0.6343
+mcc2 = 0.6343
+pr_auc = 0.908222
+prec = 0.879433
+recall = 0.729412
+roc_auc = 0.877362
+sn = 0.729412
+sp = 0.89697
+total_loss = 9.871945
