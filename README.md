@@ -49,7 +49,7 @@ These results correspond to the following experiments in our paper:
 
 | Folder | Paper Reference | Description |
 | :--- | :--- | :--- |
-| `1_lucaone_lucabase_ft50` | Table 2, Table 3 | Our proposed method (LucaOne + LucaBase, fine-tuned 50 epochs) |
+| `1_lucaone_lucabase_ft50` | Table 2, Table 3, Table 4 | Our proposed method (LucaOne + LucaBase, fine-tuned 50 epochs) |
 | `2_dnabert2_lucabase_ft50` | Table 2 | Baseline: DNABert2 embedding + LucaBase |
 | `3_onehot_lucabase_ft50` | Table 2 | Baseline: Onehot encoding + LucaBase |
 | `4_lucaone_linear_ft50` | Table 3 | Comparison: LucaOne + linear classifier |
