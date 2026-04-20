@@ -5,6 +5,8 @@ Integrating Pretrained Biological Representations for Identification and Generat
 
 We have constructed high-quality and cross-species promoter datasets covering six representative industrial microorganisms. All promoter sequences are length-normalized to 81 bp (from –60 to +20 bp relative to the transcription start site), covering the core regulatory region. The dataset is strictly deduplicated (CD-HIT, 90% identity) and split into training / validation / test sets with a 7:1:2 ratio, maintaining an approximately 1:1 positive-negative balance.
 
+👉 **All dataset files are available in the [`Datasets/`](./Datasets/) directory**, organized by species (e.g., `Escherichia coli/`, `Bacillus subtilis/`, etc.).
+
 ## 🧬 Model Usage
 
 Our fine-tuned promoter identification models for six industrial microbial species are built upon the **LucaOne** biological foundation model. To perform inference with these models (i.e., to identify promoters in your own sequences), please refer to the official **LucaOneTasks** project, which provides a complete pipeline for loading fine-tuned LucaOne models and running predictions.
