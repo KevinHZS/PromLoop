@@ -97,3 +97,64 @@ These results correspond to the following experiments in our paper:
 
 You can directly load any CSV file to reproduce our evaluation metrics (Accuracy, Precision, Recall, F1, MCC, AUC) or to compare with your own models.
 
+
+## 🔬 Evaluation Tools
+
+To help you reproduce all quantitative analyses in our paper or apply the same evaluation pipeline to your own data, we provide three standalone Python scripts in the [`Evaluation/`](./Evaluation/) folder.
+
+| Script | Purpose | Corresponding Paper Section |
+| :--- | :--- | :--- |
+| `Identification_metrics.py` | Compute Accuracy, Precision, Recall, F1, MCC, AUC from prediction CSV files | Section 4.2 (Tables 2–5) |
+| `GC & Kmer.py` | Generate GC content boxplots and 3‑mer frequency bar plots for generated vs. real sequences | Section 4.2.6 (Figure 4 & Appendix A) |
+| `motif_analysis.py` | Extract top enriched 6‑mers and count known core promoter motifs (TATA‑box, DPE, GC‑box) | Section 4.2.7 (Figure 5 & Table 7) |
+
+### 1. Identification Metrics (`Identification_metrics.py`)
+
+**Usage** – Modify the file paths at the bottom of the script:
+
+```python
+metrics, true_labels, pred_labels = load_and_calculate(
+    '../Datasets/Bradyrhizobium/test.csv',          # ground truth file
+    '../Results/1_lucaone_lucabase_ft50/Bradyrhizobium.csv',  # prediction file
+    true_label_col='label',
+    pred_label_col='label',
+    pred_prob_col='prob'
+)
+print_metrics(metrics)
+```
+
+Run the script:
+```python
+python Evaluation/Identification_metrics.py
+```
+
+### 2. GC & 3‑mer Analysis (`GC & Kmer.py`)
+**Usage** – Edit the configuration section at the top of the script:
+
+```python
+GENERATED_PREDICTIONS_FILE = "../Results/1_lucaone_lucabase_ft50/Bradyrhizobium.csv"
+REAL_SAMPLES_FILE = "../Datasets/Bradyrhizobium/positive_samples.csv"
+SPECIES_NAME = "Bradyrhizobium"
+```
+
+Then run:
+```python
+python Evaluation/GC & Kmer.py
+```
+
+The script will produce two publication‑ready PDF figures:
+- gc_content_comparison_boxplot_<species>.pdf
+- k3_mer_frequency_comparison_<species>.pdf
+
+### 3. Motif Analysis (motif_analysis.py)
+**Usage** – Adjust the BASE_DIR and SPECIES_DIRS variables to point to your generated sequence CSV files. The script expects each species subfolder to contain a prediction_result.csv file with at least seq and label columns.
+
+```python
+python Evaluation/motif_analysis.py
+```
+
+Outputs:
+- A combined figure motif_top5_per_species_beautiful.png / .pdf showing top‑5 enriched 6‑mers for each species.
+- A console table with counts of known core promoter motifs.
+
+**Note:** The scripts are pre‑configured to work with the folder structure of this repository. If you use your own data, simply update the file paths accordingly.
