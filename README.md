@@ -32,6 +32,46 @@ All six fine-tuned models are available on Hugging Face Hub:
 | *Bradyrhizobium* | [`lucaone-bradyhizobium-promoter-id`](https://huggingface.co/huangzhengsheng/lucaone-bradyrhizobium-promoter-id) |
 
 
+## 🧬 Promoter Generation with LucaVAE
+
+Beyond promoter identification, we provide a **conditional variational autoencoder (LucaVAE)** for *de novo* generation of functional promoter sequences. LucaVAE leverages the same LucaOne embeddings as conditional priors, enabling function‑guided sequence synthesis.
+
+👉 The generation code is available in [`LucaVAE.py`](./LucaVAE.py).
+
+### How to Use LucaVAE
+
+#### 1. Prepare Input Data
+
+You need two things:
+- A CSV file containing promoter sequences (e.g., `Datasets/Escherichia coli/Datasets.csv`) with a column named `seq` (or customize `SEQUENCE_COLUMN_NAME`).
+- Pre‑computed LucaOne embeddings for each sequence (as `.pt` files).  
+  *See the [LucaOneTasks](https://github.com/LucaOne/LucaOneTasks) repository for how to generate embeddings.*
+
+#### 2. Configure and Run
+
+Edit the configuration section in `LucaVAE.py`:
+
+```python
+CSV_FILE_PATH = "path/to/your/sequences.csv"
+EMBEDDING_DIR = "path/to/your/embedding/files"
+SEQUENCE_COLUMN_NAME = "seq"
+MATRIX_FILE_PATTERN = "matrix_{}.pt"   # adjust to your file naming
+CHECKPOINT_DIR = "./lucavae_checkpoints"
+```
+
+Then run the script:
+```python
+python LucaVAE.py
+```
+
+The script will:
+- Train the VAE for up to 200 epochs (early stopping on validation loss).
+- Save the best model checkpoint and final model weights.
+- Generate new promoter sequences using the best model (default: 5 sequences per condition embedding, temperature = 1.2).
+- Output a CSV file (generated_promoters_<N>.csv) with unique generated sequences.
+
+
+
 ## 📊 Experimental Results – Reproducibility Data
 
 To ensure full transparency and reproducibility of all results reported in our paper, we provide the complete prediction outputs for **five different experimental configurations** on the test sets of all six microbial species.
